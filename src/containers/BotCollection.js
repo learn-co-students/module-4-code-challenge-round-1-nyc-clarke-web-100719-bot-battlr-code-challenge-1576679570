@@ -71,19 +71,19 @@ class BotCollection extends React.Component {
 				onChange={(e)=>this.handleChange('sortBy',e.target.value)}
 				value={this.state.sortBy}
 			>
-			<option value="none">No Sort</option>
-			<option value="health">Health</option>
-			<option value="damage">Damage</option>
-			<option value="armor">Armor</option>
+				<option value="none">No Sort</option>
+				<option value="health">Health</option>
+				<option value="damage">Damage</option>
+				<option value="armor">Armor</option>
 			</select>
 		Filter: <select
 				onChange={(e)=>this.handleChange('filter',e.target.value)}
 				value={this.state.filter}
 			>
-			<option value="none">No Filter</option>
-			<option value="support">Support Only</option>
-			<option value="assault">Assault Only</option>
-			<option value="defender">Defender Only</option>
+				<option value="none">No Filter</option>
+				<option value="support">Support Only</option>
+				<option value="assault">Assault Only</option>
+				<option value="defender">Defender Only</option>
 			</select>
 			{/* Bots to be Rendered */}
     		<div className="row">
