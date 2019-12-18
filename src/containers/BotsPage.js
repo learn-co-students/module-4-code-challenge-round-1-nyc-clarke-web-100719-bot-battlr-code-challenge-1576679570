@@ -1,14 +1,16 @@
 import React from "react";
 import * as requests from '../requests.js'
 import YourBotArmy from "./YourBotArmy.js";
+import BotSpecs from "../components/BotSpecs.js";
 import BotCollection from "./BotCollection.js";
 
 class BotsPage extends React.Component {
   //start here with your code for step one
-
+  
   state = {
     bots: [],
-    enlistedBots: []
+    enlistedBots: [],
+    selectedBot: null
   }
 
   componentDidMount() {
@@ -16,15 +18,27 @@ class BotsPage extends React.Component {
       .then(bots => this.setState({ bots: bots }))
   }
 
-  enlistBot = (botId) => {
+
+
+  enlistBot = (bot) => {
     this.setState(prevState => {
-      const enlistedBot = prevState.bots.find(bot => bot.id === botId)
-      if (!prevState.enlistedBots.includes(enlistedBot)) {
+      if (!prevState.enlistedBots.includes(bot)) {
         return {
-          enlistedBots: [...prevState.enlistedBots, enlistedBot]
+          enlistedBots: [...prevState.enlistedBots, bot],
+          selectedBot: null
         }
+      } else {
+        alert("You've already enlisted this bot!")
       }
     })
+  }
+
+  selectBot = (bot) => {
+    this.setState({selectedBot: bot})
+  }
+
+  goBack = () => {
+    this.setState({selectedBot: null})
   }
 
   render() {
@@ -33,7 +47,10 @@ class BotsPage extends React.Component {
       <div>
         {/* put your components here */}
         <YourBotArmy enlistedBots={this.state.enlistedBots} />
-        <BotCollection bots={this.state.bots} enlistBot={this.enlistBot} />
+        { this.state.selectedBot
+          ? <BotSpecs bot={this.state.selectedBot} enlistBot={this.enlistBot} goBack={this.goBack}/> 
+          : <BotCollection bots={this.state.bots} selectBot={this.selectBot} />
+        }
       </div>
     );
   }
