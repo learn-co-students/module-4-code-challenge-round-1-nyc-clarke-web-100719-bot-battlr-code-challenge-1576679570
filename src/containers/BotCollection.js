@@ -62,6 +62,7 @@ class BotCollection extends React.Component {
 	}
   }
 
+  //Renders two select forms for user to specify Sort and Filter for bots, as well as the bots themselves
   render(){
   	return (
   	  <div className="ui four column grid">
@@ -86,9 +87,7 @@ class BotCollection extends React.Component {
 			</select>
 			{/* Bots to be Rendered */}
     		<div className="row">
-    		  
     		  Collection of all bots
-			  
 			  {this.botsToRender()}
     		</div>
   	  </div>
