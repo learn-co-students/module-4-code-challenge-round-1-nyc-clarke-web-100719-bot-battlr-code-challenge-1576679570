@@ -9,11 +9,15 @@ class BotCollection extends React.Component {
 	
 
 	renderBots = () => {
+
 		const {robots, addToArmy, handleShowPageClick, sort} = this.props
+
 		let robotsToDisplay = robots;
+
 		if (sort) {
 			robotsToDisplay = robotsToDisplay.sort((robotA, robotB) => robotB[sort] - robotA[sort])
 		} 
+		
 		return robotsToDisplay.map(robot => <BotCard key={robot.id} bot={robot} addToArmy={addToArmy} army={this.state.army} handleShowPageClick={handleShowPageClick} />)
 	}
 

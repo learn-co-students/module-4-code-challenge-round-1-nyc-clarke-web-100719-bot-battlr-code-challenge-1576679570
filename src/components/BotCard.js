@@ -5,7 +5,16 @@ const BotCard = props => {
 
   let botType;
 
+  //**attempted to convert the binary code catchphrases into text
+  // would've called binaryAgent on the catchphrase
   
+  // const binaryAgent = (str) => {
+  //   let binString = '';
+  //   str.split(' ').map(binary => {
+  //       return binString += String.fromCharCode(parseInt(binary));
+  //     });
+  //   return binString;
+  //   }
 
   switch (bot.bot_class) {
     case "Assault":
