@@ -5,6 +5,8 @@ const BotCard = props => {
 
   let botType;
 
+  
+
   switch (bot.bot_class) {
     case "Assault":
       botType = <i className="icon military" />;
@@ -24,7 +26,7 @@ const BotCard = props => {
       <div
         className="ui card"
         key={bot.id}
-        onClick={props.army ? () => props.dischargeBot(bot) : () => props.addToArmy(bot)}
+        onClick={props.army ? () => props.dischargeBot(bot) : () => props.handleShowPageClick(bot)}
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
