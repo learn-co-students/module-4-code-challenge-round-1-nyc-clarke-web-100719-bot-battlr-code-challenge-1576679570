@@ -6,7 +6,7 @@ import BotCollection from "./BotCollection.js";
 
 class BotsPage extends React.Component {
   //start here with your code for step one
-  
+
   state = {
     bots: [],
     enlistedBots: [],
@@ -14,13 +14,13 @@ class BotsPage extends React.Component {
   }
 
   componentDidMount() {
+    //fetches bots off function written in requests.js
     requests.fetchBots()
       .then(bots => this.setState({ bots: bots }))
   }
 
-
-
   enlistBot = (bot) => {
+    //passed down to botspecs to onclick the enlist button
     this.setState(prevState => {
       if (!prevState.enlistedBots.includes(bot)) {
         return {
@@ -34,15 +34,16 @@ class BotsPage extends React.Component {
   }
 
   selectBot = (bot) => {
+    //passed down to botcollection to register on click of bot div
     this.setState({selectedBot: bot})
   }
 
   goBack = () => {
+    //passed down to botspecs to rerender botcollection. could not figure out how to save the scroll position
     this.setState({selectedBot: null})
   }
 
   render() {
-    console.log(this.state)
     return (
       <div>
         {/* put your components here */}
