@@ -1,8 +1,6 @@
 import React from "react";
 
 const BotCard = props => {
-
-  console.log(props.army)
   let botType;
 
   switch (props.bot_class) {
