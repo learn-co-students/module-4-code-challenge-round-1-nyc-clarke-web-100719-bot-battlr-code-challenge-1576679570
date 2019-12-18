@@ -2,6 +2,7 @@ import React from "react";
 import BotCollection from './BotCollection';
 import YourBotArmy from './YourBotArmy';
 import BotSpecs from '../components/BotSpecs';
+import SortBotForm from '../components/SortBotForm';
 
 const API = "https://bot-battler-api.herokuapp.com/api/v1/bots"
 
@@ -11,7 +12,8 @@ class BotsPage extends React.Component {
     robots: [],
     army: [],
     showPageClicked: false,
-    bot: {}
+    bot: {},
+    sort: null
   }
 
   addToArmy = bot => {
@@ -42,6 +44,12 @@ class BotsPage extends React.Component {
     })
   }
 
+  handleSortChange = e => {
+    this.setState({
+      sort: e.target.value
+    })
+  }
+
 
   componentDidMount() {
     fetch(API)
@@ -54,10 +62,11 @@ class BotsPage extends React.Component {
   render() {
     return (
       <div>
-        <YourBotArmy army={this.state.army} dischargeBot={this.dischargeBot} />
-        {this.state.showPageClicked ? <BotSpecs bot={this.state.bot} addToArmy={this.addToArmy} hideShowPage={this.hideShowPage} /> : <BotCollection robots={this.state.robots} addToArmy={this.addToArmy} handleShowPageClick={this.handleShowPageClick} />}
         
-        {/* put your components here */}
+        <YourBotArmy army={this.state.army} dischargeBot={this.dischargeBot} />
+        <SortBotForm handleSortChange={this.handleSortChange} />
+        {this.state.showPageClicked ? <BotSpecs bot={this.state.bot} addToArmy={this.addToArmy} hideShowPage={this.hideShowPage} /> : <BotCollection robots={this.state.robots} addToArmy={this.addToArmy} handleShowPageClick={this.handleShowPageClick} sort={this.state.sort} />}
+        
       </div>
     );
   }

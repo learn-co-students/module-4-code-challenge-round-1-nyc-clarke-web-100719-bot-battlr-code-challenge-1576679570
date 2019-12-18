@@ -6,13 +6,23 @@ class BotCollection extends React.Component {
 	state = {
 		army: false
 	}
+	
+
+	renderBots = () => {
+		const {robots, addToArmy, handleShowPageClick, sort} = this.props
+		let robotsToDisplay = robots;
+		if (sort) {
+			robotsToDisplay = robotsToDisplay.sort((robotA, robotB) => robotB[sort] - robotA[sort])
+		} 
+		return robotsToDisplay.map(robot => <BotCard key={robot.id} bot={robot} addToArmy={addToArmy} army={this.state.army} handleShowPageClick={handleShowPageClick} />)
+	}
 
   render(){
-		const {robots, addToArmy, handleShowPageClick} = this.props
+		
   	return (
   	  <div className="ui four column grid">
     		<div className="row">
-    		  {robots.map(robot => <BotCard key={robot.id} bot={robot} addToArmy={addToArmy} army={this.state.army} handleShowPageClick={handleShowPageClick} />)}
+    		  {this.renderBots()}
     		  Collection of all bots
     		</div>
   	  </div>
