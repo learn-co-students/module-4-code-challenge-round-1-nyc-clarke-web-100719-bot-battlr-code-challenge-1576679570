@@ -2,9 +2,9 @@ import React from "react";
 import BotCard from "../components/BotCard";
 
 class YourBotArmy extends React.Component {
-  // STEP THREE : Removing Bot functionality
+  // STEP THREE : Removing Bot from BotArmy
   // bots will add to army on collection bot click and be removed on army bot click (CONDITIONAL rendering needed)
-
+  
   renderBotArmy = () => {
     return this.props.bots.map((bot)=>{
       if(bot.inMyArmy) {

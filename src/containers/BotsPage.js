@@ -4,10 +4,10 @@ import YourBotArmy from "./YourBotArmy"
 
 const API = "https://bot-battler-api.herokuapp.com/api/v1/bots"
 class BotsPage extends React.Component {
-  //start here with your code for step one
+  // Start--->
   // STEP ONE : Fetch from bots API, render bots data on page as soon as page loads with component did mount
   // Set initial state of all bots data (array) to pass down to bot collection and bot army componenets
-  // the bots array should be stored here in state because both bot collection and bot army need acess to the data
+  // The bots array should be stored here in state because both bot collection and bot army need acess to the data
   
   state = {
     bots: []
