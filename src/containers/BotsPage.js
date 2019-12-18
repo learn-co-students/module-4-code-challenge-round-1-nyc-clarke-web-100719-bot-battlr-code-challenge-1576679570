@@ -1,13 +1,16 @@
 import React from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from "./YourBotArmy";
+import BotSpecs from "../components/BotSpecs";
 
 class BotsPage extends React.Component {
   //start here with your code for step one
   state = {
     allBots: [],
     botArmyIds: [],
-    botArmy: []
+    botArmy: [],
+    showView: false,
+    botShow: {}
   }
 
   componentDidMount() {
@@ -17,6 +20,12 @@ class BotsPage extends React.Component {
   }
 
   addToArmy = (botObj) => {
+
+    botObj = {
+      ...botObj,
+      inArmy: true
+    };
+    
     // why can't I map over this.state.botArmy and check the ids? 
     if (this.state.botArmyIds.includes(botObj.id)) {
       alert("You can only add a bot to your army once!") 
@@ -24,7 +33,7 @@ class BotsPage extends React.Component {
       this.setState({ 
         botArmyIds: [...this.state.botArmyIds, botObj.id],
         botArmy: [...this.state.botArmy, botObj],
-        
+        showView: false
       })
     }
   }
@@ -40,11 +49,22 @@ class BotsPage extends React.Component {
     })
   }
 
+  toggleShow = (botObj = {}) => {
+    this.setState({ 
+      showView: !this.state.showView,
+      botShow: botObj
+    })
+  }
+
   render() {
     return (
       <div>
         <YourBotArmy botArmy={this.state.botArmy} removeFromArmy={this.removeFromArmy}/>
-        <BotCollection allBots={this.state.allBots} addToArmy={this.addToArmy}/>
+        {this.state.showView ? 
+          <BotSpecs bot={this.state.botShow} toggleShow={this.toggleShow} addToArmy={this.addToArmy} /> 
+          : 
+          <BotCollection allBots={this.state.allBots} toggleShow={this.toggleShow}/> 
+        }
       </div>
     );
   }
