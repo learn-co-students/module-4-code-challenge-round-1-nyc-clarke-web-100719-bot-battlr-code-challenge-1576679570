@@ -1,6 +1,7 @@
 import React from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from "./YourBotArmy";
+import BotSpecs from "../components/BotSpecs";
 
 const URI = "https://bot-battler-api.herokuapp.com/api/v1/bots";
 
@@ -10,7 +11,9 @@ class BotsPage extends React.Component {
   state = {
     bots: [],
     army: [],
-    uniqChecker: {}
+    uniqChecker: {},
+    showAllBots: true,
+    botToShow: {}
   }
 
   fetchBots = () => {
@@ -35,7 +38,7 @@ class BotsPage extends React.Component {
     else {
       alert("You already recruited this bot!");
     }
-  }
+  };
 
   removeFromArmy = (bot) => {
     let nonStateArr = [...this.state.army];
@@ -50,12 +53,26 @@ class BotsPage extends React.Component {
     else {
       alert("If you see this message, it means I didn't pass bot arg correctly");
     }
-  }
+  };
+
+  showDetails = (bot) =>{
+    this.setState({
+      showAllBots: false,
+      botToShow: bot
+    });
+  };
+
+  hideDetails = () =>{
+    this.setState({
+      showAllBots: true,
+      botToShow: {}
+    });
+  };
 
   //For debugging
   componentDidUpdate(){
-    console.log(this.state.army)
-  }
+    console.log(this.state.army);
+  };
 
   componentDidMount() {
     this.fetchBots();
@@ -66,7 +83,11 @@ class BotsPage extends React.Component {
       <div>
         {/* put your components here */}
         <YourBotArmy bots={this.state.army} clickToFire={this.removeFromArmy}/>
-        <BotCollection bots={this.state.bots} clickToAddToArmy={this.addToArmy}/>
+        {
+          this.state.showAllBots 
+          ? <BotCollection bots={this.state.bots} clickToShowSpecs={this.showDetails}/>
+          : <BotSpecs bot={this.state.botToShow} clickToAddToArmy={this.addToArmy} clickToHideSpecs={this.hideDetails} />
+        }
       </div>
     );
   };

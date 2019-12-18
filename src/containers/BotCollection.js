@@ -10,7 +10,7 @@ class BotCollection extends React.Component {
 	  		<BotCard 
 				key={bot.id+"-"+bot.name}
 				bot={bot}
-				clickHandle={this.props.clickToAddToArmy}
+				clickHandle={this.props.clickToShowSpecs}
 			/>	
 	  ));
   }
@@ -18,9 +18,11 @@ class BotCollection extends React.Component {
   render(){
   	return (
   	  <div className="ui four column grid">
+		{/* <button>Sort By Health</button> */}
     		<div className="row">
     		  {/*...and here..*/}
     		  Collection of all bots
+			  
 			  {this.botsToRender()}
     		</div>
   	  </div>
